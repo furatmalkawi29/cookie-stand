@@ -1,0 +1,12 @@
+
+#seattle , #tokyo , #dubai , #paris , #lima {
+  background-color: rgb(255, 226, 210);
+  padding: 40px;
+  margin: 30px;
+}
+
+.heading {
+  font-size: 40px;
+  color: salmon;
+  text-shadow: 3px 3px 9px rgba(150, 150, 150, 1);
+}
