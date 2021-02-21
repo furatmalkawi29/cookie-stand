@@ -1,0 +1,26 @@
+
+.container {
+  padding-bottom: 140px;;
+}
+.heading {
+  margin-left: 200px;
+  font-size: 100px;
+  color: salmon;
+  text-shadow: 3px 3px 9px rgba(150, 150, 150, 1);
+}
+
+.headingCont{
+  background:rgb(255, 254, 182);
+}
+
+
+img {
+  margin-left: 200px;
+  padding: 70px;
+  margin-bottom: 80px;
+}
+
+.salesLink {
+  font-size: 60px;
+  margin-left: 40%;
+}
