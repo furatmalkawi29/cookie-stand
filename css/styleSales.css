@@ -27,3 +27,7 @@ table tr td {
 table tr th {
   border: 1px solid black;
 }
+
+table , td , th {
+  padding: 8px;
+}
