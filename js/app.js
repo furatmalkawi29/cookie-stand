@@ -1,9 +1,6 @@
 'use strict';
 
-// Tokyo;
-// Dubai;
-// Paris;
-// Lima;
+
 
 // Seattle	23	65	6.3
 // Tokyo	3	24	1.2
@@ -11,524 +8,350 @@
 // Paris	20	38	2.3
 // Lima	2	16	4.6
 
+
 let hour = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm'];
 
-const Seattle = {
-  location: 'Seattle',
-  averageCookies: 6.3,
-  minCustomerPerHour: 23,
-  maxCustomerPerHour: 65,
-  logCustomerPerHour: [],
-  logCookiesPerHour: [],
-  total: 0,
-
-  getCookiesPerHour: function () {
 
 
-    for (let i =0; i<hour.length ;i++)
-    {
-      this.logCookiesPerHour.push(Math.ceil(this.logCustomerPerHour[i] * this.averageCookies));
-    }
-
-    return this.logCookiesPerHour;
-
-  },
-
-  getCustomersPerHour : function () {
-    let min =  this.minCustomerPerHour;
-    let max = this.maxCustomerPerHour;
 
 
-    for (let i =0; i<hour.length ; i++)
-    {
-      this.logCustomerPerHour.push( Math.ceil(Math.random() * (max - min + 1) + min));
-    }
 
-    return this.logCustomerPerHour ;
-  },
+// constructor function ----------------------------------------------------------------------------------------
+function PatCookies (location, averageCookies,minCustomerPerHour,maxCustomerPerHour)
+{
+  this.location = location;
+  this.averageCookies = averageCookies;
+  this.minCustomerPerHour = minCustomerPerHour;
+  this.maxCustomerPerHour = maxCustomerPerHour;
 
 
-  totalSum: function ()
+  this.logCustomerPerHour = [];
+  this.logCookiesPerHour = [];
+
+  this.totalLocation = 0;
+  this.totalPerHour = [];
+
+}
+
+
+
+
+// prototype ----------------------------------------------------------------------------------------
+
+PatCookies.prototype.getCookiesPerHour = function () {
+
+
+  for (let i =0; i<hour.length ;i++)
   {
+    this.logCookiesPerHour.push(Math.ceil(this.logCustomerPerHour[i] * this.averageCookies));
+  }
 
-    for (let i=0 ; i<14 ; i++)
-    {
-      this.total=this.total + this.logCookiesPerHour[i];
-    }
+  return this.logCookiesPerHour;
 
-    return this.total ;
+}; // Don't forget semi-colone (;)
 
-  },
 
-  render: function ()
+
+
+
+// ----------------------------------------------------------------------------------------
+
+PatCookies.prototype.getCookiesPerHour = function () {
+
+
+  for (let i =0; i<hour.length ;i++)
   {
-    //Parent Element div
-    const parentElement = document.getElementById ('seattle');
+    this.logCookiesPerHour.push(Math.ceil(this.logCustomerPerHour[i] * this.averageCookies));
+  }
 
-
-    // <h1></h1> ----------------
-    //1) Creat Element
-    const h1Element = document.createElement('h1');
-
-    //2) Append Element to parent
-    parentElement.appendChild (h1Element);
-
-    //3) Set text content
-    h1Element.textContent = this.location;
-
-
-    // <ul></ul> ----------------
-    const ulElement = document.createElement ('ul');
-    parentElement.appendChild(ulElement);
-
-
-    // <li></li> ----------------
-    for (let i=0; i<hour.length ;i++)
-    {
-      const liElement = document.createElement ('li'); // new <li> element
-      ulElement.appendChild(liElement); // append to <ul>
-
-      // add content to <li>
-      liElement.textContent = `${hour[i]}: ${this.logCookiesPerHour[i]} cookies`;
-    }
-
-    const liElement = document.createElement ('li'); // new <li> element
-    ulElement.appendChild(liElement); // append to <ul>
-    liElement.textContent = `Total: ${this.total} cookies`;
-  },
-
+  return this.logCookiesPerHour;
 
 };
 
 
-Seattle.getCustomersPerHour();
-Seattle.getCookiesPerHour();
-Seattle.totalSum();
-console.log(Seattle);
-Seattle.render();
-
-
-//--------------------------------TOKYO------------------------------------
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//--------------------------------------------------------------------------
 
 
 
-
-const tokyo = {
-  location: 'Tokyo',
-  averageCookies: 1.2,
-  minCustomerPerHour: 3,
-  maxCustomerPerHour: 24,
-  logCustomerPerHour: [],
-  logCookiesPerHour: [],
-  total: 0,
-
-  getCookiesPerHour: function () {
+// ----------------------------------------------------------------------------------------
 
 
-    for (let i =0; i<hour.length ;i++)
-    {
-      this.logCookiesPerHour.push(Math.ceil(this.logCustomerPerHour[i] * this.averageCookies));
-    }
 
-    return this.logCookiesPerHour;
-
-  },
-
-  getCustomersPerHour : function () {
-    let min =  this.minCustomerPerHour;
-    let max = this.maxCustomerPerHour;
+PatCookies.prototype.getCustomersPerHour = function () {
+  let min =  this.minCustomerPerHour;
+  let max = this.maxCustomerPerHour;
 
 
-    for (let i =0; i<hour.length ; i++)
-    {
-      this.logCustomerPerHour.push( Math.ceil(Math.random() * (max - min + 1) + min));
-    }
-
-    return this.logCustomerPerHour ;
-  },
-
-
-  totalSum: function ()
+  for (let i =0; i<hour.length ; i++)
   {
+    this.logCustomerPerHour.push( Math.ceil(Math.random() * (max - min + 1) + min));
+  }
 
-    for (let i=0 ; i<14 ; i++)
-    {
-      this.total=this.total + this.logCookiesPerHour[i];
-    }
+  return this.logCustomerPerHour ;
+};
 
-    return this.total ;
 
-  },
 
-  render: function ()
+
+
+
+// ----------------------------------------------------------------------------------------
+
+
+
+PatCookies.prototype.getLocationTotal = function ()
+{
+
+  for (let i=0 ; i<hour.length ; i++)
   {
-    //Parent Element div tokyo
-    const parentElement = document.getElementById ('tokyo');
+    this.totalLocation =this.totalLocation + this.logCookiesPerHour[i];
+  }
 
-
-    // <h1></h1> ----------------
-    //1) Creat Element
-    const h1Element = document.createElement('h1');
-
-    //2) Append Element to parent
-    parentElement.appendChild (h1Element);
-
-    //3) Set text content
-    h1Element.textContent = this.location;
-
-
-    // <ul></ul> ----------------
-    const ulElement = document.createElement ('ul');
-    parentElement.appendChild(ulElement);
-
-
-    // <li></li> ----------------
-    for (let i=0; i<hour.length ;i++)
-    {
-      const liElement = document.createElement ('li'); // new <li> element
-      ulElement.appendChild(liElement); // append to <ul>
-
-      // add content to <li>
-      liElement.textContent = `${hour[i]}: ${this.logCookiesPerHour[i]} cookies`;
-    }
-
-    const liElement = document.createElement ('li'); // new <li> element
-    ulElement.appendChild(liElement); // append to <ul>
-    liElement.textContent = `Total: ${this.total} cookies`;
-  },
-
+  return this.totalLocation ;
 
 };
 
+
+
+
+
+
+// ----------------------------------------------------------------------------------------
+
+
+PatCookies.prototype.renderData = function ()
+{
+
+  //Parent Element <table></table>------------
+  const parentElement = document.getElementById ('patSales');
+
+  // <tr></tr> ---------------------
+  const trElement = document.createElement('tr');
+
+  parentElement.appendChild (trElement);
+
+
+  // <th><th>  ----------------- empty
+  const td1Element = document.createElement('td');
+
+  trElement.appendChild (td1Element);
+
+  td1Element.textContent = this.location;
+
+
+  for (let i =0;i<hour.length ; i++)
+  {
+    // <th></th> --------------------- hours
+    const tdElement = document.createElement('td');
+
+    trElement.appendChild (tdElement);
+
+    tdElement.textContent = this.logCookiesPerHour[i];
+  }
+
+
+  // <th><th>  ----------------- last one
+  const td2Element = document.createElement('td');
+
+  trElement.appendChild (td2Element);
+
+  td2Element.textContent = this.totalLocation;
+
+};
+
+
+//-----------------------------------------------------------------------------------------
+
+
+
+
+
+
+// new objects ----------------------------------------------------------------------------------------
+
+const seattle = new PatCookies ( 'Seattle', 23 , 65 , 6.3 );
+
+const tokyo = new PatCookies ( 'Tokyo' , 3 , 24 , 1.2 );
+
+const dubai = new PatCookies ( 'Dubai' , 11 , 38 , 3.7 );
+
+const paris = new PatCookies ( 'Paris' , 20 , 38 , 2.3);
+
+const lima = new PatCookies ( 'Lima' , 2 , 16 , 4.6 );
+
+
+
+
+
+
+
+// Functions ------------------------------------------------------------------------------------
+
+
+const renderHeader = function ()
+{
+  //Parent Element <table></table>------------
+  const parentElement = document.getElementById ('patSales');
+
+  // <tr></tr> ---------------------
+  const trElement = document.createElement('tr');
+
+  parentElement.appendChild (trElement);
+
+
+  // <th><th>  ----------------- empty
+  const th1Element = document.createElement('th');
+
+  trElement.appendChild (th1Element);
+
+  th1Element.textContent = ' --- ';
+
+
+  for (let i =0;i<hour.length ; i++)
+  {
+    // <th></th> --------------------- hours
+    const thElement = document.createElement('th');
+
+    trElement.appendChild (thElement);
+
+    thElement.textContent = hour[i];
+  }
+
+
+  // <th><th>  ----------------- last one
+  const th2Element = document.createElement('th');
+
+  trElement.appendChild (th2Element);
+
+  th2Element.textContent = 'Daily Location Total';
+
+};
+
+
+
+
+
+
+
+//---------------------------------------------------------------------------------------------------
+
+const renderFooter = function () {
+  //Parent Element <table></table>------------
+  const parentElement = document.getElementById ('patSales');
+
+  // <tr></tr> ---------------------
+  const trElement = document.createElement('tr');
+
+  parentElement.appendChild(trElement);
+
+
+  // <th><th>  ----------------- empty
+  const th1Element = document.createElement('th');
+
+  trElement.appendChild(th1Element);
+
+  th1Element.textContent = ' Totals ';
+
+
+  // Totals of each hour --------------------
+
+  let objArr = [seattle, tokyo, dubai, paris, lima];
+  let total1;
+
+  for(let i = 0; i < hour.length; i++) {
+    total1 = 0;
+
+    // <th><th>  -----------------
+    const thElement = document.createElement('th');
+    trElement.appendChild(thElement);
+
+    for(let x = 0; x < objArr.length; x++) // 5 locations
+    {
+      total1 = total1 + objArr[x].logCookiesPerHour[i];
+    }
+
+    thElement.textContent = total1;
+  }
+
+  // Total of toalLocation --------------------
+
+  let total2 = 0;
+
+  // <th><th>  -----------------
+  const th2Element = document.createElement('th');
+  trElement.appendChild(th2Element);
+
+
+  for(let i = 0; i < objArr.length; i++) //dynamic variable
+  {
+    total2 = total2 + objArr[i].totalLocation;
+  }
+
+  th2Element.textContent = total2;
+
+};
+
+
+
+
+
+// Invoking ------------------------------------------------------------------------------------------
+
+//--------------------------- Header ------------------------------------------
+renderHeader();
+
+// //--------------------------------Seattle------------------------------------
+seattle.getCustomersPerHour();
+seattle.getCookiesPerHour();
+seattle.getLocationTotal();
+console.log(seattle);
+seattle.renderData();
+
+
+
+// //--------------------------------TOKYO------------------------------------
 
 
 
 
 tokyo.getCustomersPerHour();
 tokyo.getCookiesPerHour();
-tokyo.totalSum();
+tokyo.getLocationTotal();
 console.log(tokyo);
-tokyo.render();
+tokyo.renderData();
 
 
 
-
-
-
-//--------------------------------DUBAI-----------------------------------
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//--------------------------------------------------------------------------
-
-
-
-
-
-const dubai = {
-  location: 'Dubai',
-  averageCookies: 	3.7,
-  minCustomerPerHour: 11,
-  maxCustomerPerHour: 38,
-  logCustomerPerHour: [],
-  logCookiesPerHour: [],
-  total: 0,
-
-  getCookiesPerHour: function () {
-
-
-    for (let i =0; i<hour.length ;i++)
-    {
-      this.logCookiesPerHour.push(Math.ceil(this.logCustomerPerHour[i] * this.averageCookies));
-    }
-
-    return this.logCookiesPerHour;
-
-  },
-
-  getCustomersPerHour : function () {
-    let min =  this.minCustomerPerHour;
-    let max = this.maxCustomerPerHour;
-
-
-    for (let i =0; i<hour.length ; i++)
-    {
-      this.logCustomerPerHour.push( Math.ceil(Math.random() * (max - min + 1) + min));
-    }
-
-    return this.logCustomerPerHour ;
-  },
-
-
-  totalSum: function ()
-  {
-
-    for (let i=0 ; i<14 ; i++)
-    {
-      this.total=this.total + this.logCookiesPerHour[i];
-    }
-
-    return this.total ;
-
-  },
-
-  render: function ()
-  {
-    //Parent Element div 
-    const parentElement = document.getElementById ('dubai');
-
-
-    // <h1></h1> ----------------
-    //1) Creat Element
-    const h1Element = document.createElement('h1');
-
-    //2) Append Element to parent
-    parentElement.appendChild (h1Element);
-
-    //3) Set text content
-    h1Element.textContent = this.location;
-
-
-    // <ul></ul> ----------------
-    const ulElement = document.createElement ('ul');
-    parentElement.appendChild(ulElement);
-
-
-    // <li></li> ----------------
-    for (let i=0; i<hour.length ;i++)
-    {
-      const liElement = document.createElement ('li'); // new <li> element
-      ulElement.appendChild(liElement); // append to <ul>
-
-      // add content to <li>
-      liElement.textContent = `${hour[i]}: ${this.logCookiesPerHour[i]} cookies`;
-    }
-
-    const liElement = document.createElement ('li'); // new <li> element
-    ulElement.appendChild(liElement); // append to <ul>
-    liElement.textContent = `Total: ${this.total} cookies`;
-  },
-
-
-};
-
-
+// //--------------------------------DUBAI-----------------------------------
 
 
 dubai.getCustomersPerHour();
 dubai.getCookiesPerHour();
-dubai.totalSum();
+dubai.getLocationTotal();
 console.log(dubai);
-dubai.render();
+dubai.renderData();
 
 
 
-
-
-//--------------------------------PARIS-----------------------------------
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//--------------------------------------------------------------------------
-
-
-
-
-const paris = {
-  location: 'Paris',
-  averageCookies: 2.365,
-  minCustomerPerHour: 20,
-  maxCustomerPerHour: 38,
-  logCustomerPerHour: [],
-  logCookiesPerHour: [],
-  total: 0,
-
-  getCookiesPerHour: function () {
-
-
-    for (let i =0; i<hour.length ;i++)
-    {
-      this.logCookiesPerHour.push(Math.ceil(this.logCustomerPerHour[i] * this.averageCookies));
-    }
-
-    return this.logCookiesPerHour;
-
-  },
-
-  getCustomersPerHour : function () {
-    let min =  this.minCustomerPerHour;
-    let max = this.maxCustomerPerHour;
-
-
-    for (let i =0; i<hour.length ; i++)
-    {
-      this.logCustomerPerHour.push( Math.ceil(Math.random() * (max - min + 1) + min));
-    }
-
-    return this.logCustomerPerHour ;
-  },
-
-
-  totalSum: function ()
-  {
-
-    for (let i=0 ; i<14 ; i++)
-    {
-      this.total=this.total + this.logCookiesPerHour[i];
-    }
-
-    return this.total ;
-
-  },
-
-  render: function ()
-  {
-    //Parent Element div 
-    const parentElement = document.getElementById ('paris');
-
-
-    // <h1></h1> ----------------
-    //1) Creat Element
-    const h1Element = document.createElement('h1');
-
-    //2) Append Element to parent
-    parentElement.appendChild (h1Element);
-
-    //3) Set text content
-    h1Element.textContent = this.location;
-
-
-    // <ul></ul> ----------------
-    const ulElement = document.createElement ('ul');
-    parentElement.appendChild(ulElement);
-
-
-    // <li></li> ----------------
-    for (let i=0; i<hour.length ;i++)
-    {
-      const liElement = document.createElement ('li'); // new <li> element
-      ulElement.appendChild(liElement); // append to <ul>
-
-      // add content to <li>
-      liElement.textContent = `${hour[i]}: ${this.logCookiesPerHour[i]} cookies`;
-    }
-
-    const liElement = document.createElement ('li'); // new <li> element
-    ulElement.appendChild(liElement); // append to <ul>
-    liElement.textContent = `Total: ${this.total} cookies`;
-  },
-
-
-};
+// //--------------------------------PARIS-----------------------------------
 
 
 
 paris.getCustomersPerHour();
 paris.getCookiesPerHour();
-paris.totalSum();
+paris.getLocationTotal();
 console.log(paris);
-paris.render();
+paris.renderData();
 
 
-
-//--------------------------------LIMA-------------------------------------
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//--------------------------------------------------------------------------
-
-
-
-
-const lima = {
-  location: 'Lima',
-  averageCookies: 4.6,
-  minCustomerPerHour: 2,
-  maxCustomerPerHour: 16,
-  logCustomerPerHour: [],
-  logCookiesPerHour: [],
-  total: 0,
-
-  getCookiesPerHour: function () {
-
-
-    for (let i =0; i<hour.length ;i++)
-    {
-      this.logCookiesPerHour.push(Math.ceil(this.logCustomerPerHour[i] * this.averageCookies));
-    }
-
-    return this.logCookiesPerHour;
-
-  },
-
-  getCustomersPerHour : function () {
-    let min =  this.minCustomerPerHour;
-    let max = this.maxCustomerPerHour;
-
-
-    for (let i =0; i<hour.length ; i++)
-    {
-      this.logCustomerPerHour.push( Math.ceil(Math.random() * (max - min + 1) + min));
-    }
-
-    return this.logCustomerPerHour ;
-  },
-
-
-  totalSum: function ()
-  {
-
-    for (let i=0 ; i<14 ; i++)
-    {
-      this.total=this.total + this.logCookiesPerHour[i];
-    }
-
-    return this.total ;
-
-  },
-
-  render: function ()
-  {
-    //Parent Element div 
-    const parentElement = document.getElementById ('lima');
-
-
-    // <h1></h1> ----------------
-    //1) Creat Element
-    const h1Element = document.createElement('h1');
-
-    //2) Append Element to parent
-    parentElement.appendChild (h1Element);
-
-    //3) Set text content
-    h1Element.textContent = this.location;
-
-
-    // <ul></ul> ----------------
-    const ulElement = document.createElement ('ul');
-    parentElement.appendChild(ulElement);
-
-
-    // <li></li> ----------------
-    for (let i=0; i<hour.length ;i++)
-    {
-      const liElement = document.createElement ('li'); // new <li> element
-      ulElement.appendChild(liElement); // append to <ul>
-
-      // add content to <li>
-      liElement.textContent = `${hour[i]}: ${this.logCookiesPerHour[i]} cookies`;
-    }
-
-    const liElement = document.createElement ('li'); // new <li> element
-    ulElement.appendChild(liElement); // append to <ul>
-    liElement.textContent = `Total: ${this.total} cookies`;
-  },
-
-
-};
-
-
+// //--------------------------------LIMA-------------------------------------
 
 
 
 lima.getCustomersPerHour();
 lima.getCookiesPerHour();
-lima.totalSum();
+lima.getLocationTotal();
 console.log(lima);
-lima.render();
+lima.renderData();
+
+//---------------------------Footer ------------------------------------------
+renderFooter();
