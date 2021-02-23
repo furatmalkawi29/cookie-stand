@@ -14,13 +14,67 @@
 }
 
 
-img {
+.hero {
   margin-left: 200px;
   padding: 70px;
   margin-bottom: 80px;
+  background-image: url(https://i.pinimg.com/originals/fb/3c/f2/fb3cf2fcbc704f77fca8a909d47cf526.jpg);
 }
 
 .salesLink {
   font-size: 60px;
   margin-left: 40%;
 }
+
+.seattle, .dubai, .lima 
+{
+  background-color: rgb(255, 210, 205);
+}
+
+
+.tokyo , .paris , .cookiesGallary
+{
+  background-color: rgb(255, 204, 128);
+}
+
+.container div h1 {
+  font-size: 50px;
+  text-transform: uppercase;
+}
+
+.container div {
+  text-align: center;
+  padding: 25px;
+}
+
+.cookiesGallary {
+  font-size: 40px;
+  text-align: center;
+  text-transform: uppercase;
+  color: aliceblue;
+  text-shadow: 3px 3px 9px rgba(150, 150, 150, 1);
+}
+
+/* -------------------------------------- Gallary -----------------------*/
+
+
+          div.gallery {
+            margin: 5px;
+            border: 1px solid #ccc;
+            float: left;
+            width: 180px;
+          }
+          
+          div.gallery:hover {
+            border: 1px solid #777;
+          }
+          
+          div.gallery img {
+            width: 100%;
+            height: auto;
+          }
+          
+          div.desc {
+            padding: 15px;
+            text-align: center;
+          }

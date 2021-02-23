@@ -31,3 +31,9 @@ table tr th {
 table , td , th {
   padding: 8px;
 }
+
+
+.indexLink {
+  font-size: 60px;
+  margin-left: 40%;
+}
