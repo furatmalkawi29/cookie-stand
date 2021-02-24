@@ -3,28 +3,68 @@
 <head>
   <title>Document</title>
   <link rel="stylesheet" href="css/styleSales.css">
+<!-- <link rel="stylesheet" href="css/reset.css"> -->
 </head>
 <body>
   <header></header>
 
   <main>
 
-  <div class="container">
 
     <h1 class= "heading">Pat's Salmon Cookies: Sales Data </h1>
+
+
+
+<!---------------------------------------Form--------------------------------------------------------->
+
+
+
+
+    <form id="addNewLocation">
+
+      <fieldset>
+    <legend>Add New shop To The System </legend>
+
+
+<label for ="location">Shop Location</label>
+<input type="text" id="location" name="shop_location" value="Amman">
+
+<label for ="avgCookies">Average Cookies/ Customer</label>
+<input type="text" id="avgCookies" name="shop_avg_cookies" value="6">
+
+
+<label for ="minCustomer">Min Hourly Customers</label>
+<input type="text" id="minCustomer" name="shop_min_customer" value="5">
+
+
+<label for ="maxCustomer">Max Hourly Customers</label>
+<input type="text" id="maxCustomer" name="shop_max_customer" value="15">
+
+<button type="submit">Add Shop</button>
+
+    </fieldset>
+    </form>
+
+
+
+
+<!---------------------------------------Table--------------------------------------------------------->
+
+
 
     <div id="containerSec">
 
       <table id="patSales">
 
-
-
       </table>
 
     </div>
+
     <a class="indexLink" href="index.html"> Back Home </a>
 
-  </div>
+
+
+
 
     <script src="js/app.js"></script>
   </main>
