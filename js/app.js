@@ -13,7 +13,7 @@ let hour = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm'
 
 
 
-
+const allShopsArray =[]; // dynamic array 
 
 
 // constructor function ----------------------------------------------------------------------------------------
@@ -30,9 +30,8 @@ function PatCookies (location, averageCookies,minCustomerPerHour,maxCustomerPerH
 
   this.totalLocation = 0;
   this.totalPerHour = [];
-
+  allShopsArray.push(this); // at each call , add the new object created
 }
-
 
 
 
@@ -121,6 +120,13 @@ PatCookies.prototype.getLocationTotal = function ()
 PatCookies.prototype.renderData = function ()
 {
 
+  if (allShopsArray.length > 5) //check if new shop added (other than original 5 )
+  {
+    const idTotalRow = document.getElementById ('totalRow'); // get total row 
+    idTotalRow.remove(); // remove total row
+
+  }
+
   //Parent Element <table></table>------------
   const parentElement = document.getElementById ('patSales');
 
@@ -130,7 +136,7 @@ PatCookies.prototype.renderData = function ()
   parentElement.appendChild (trElement);
 
 
-  // <th><th>  ----------------- empty
+  // <td><td>  ----------------- empty
   const td1Element = document.createElement('td');
 
   trElement.appendChild (td1Element);
@@ -140,7 +146,7 @@ PatCookies.prototype.renderData = function ()
 
   for (let i =0;i<hour.length ; i++)
   {
-    // <th></th> --------------------- hours
+    // <td></td> --------------------- hours
     const tdElement = document.createElement('td');
 
     trElement.appendChild (tdElement);
@@ -149,7 +155,7 @@ PatCookies.prototype.renderData = function ()
   }
 
 
-  // <th><th>  ----------------- last one
+  // <td><td>  ----------------- last one
   const td2Element = document.createElement('td');
 
   trElement.appendChild (td2Element);
@@ -157,12 +163,6 @@ PatCookies.prototype.renderData = function ()
   td2Element.textContent = this.totalLocation;
 
 };
-
-
-//-----------------------------------------------------------------------------------------
-
-
-
 
 
 
@@ -254,7 +254,6 @@ const renderFooter = function () {
 
   // Totals of each hour --------------------
 
-  let objArr = [seattle, tokyo, dubai, paris, lima];
   let total1;
 
   for(let i = 0; i < hour.length; i++) {
@@ -264,9 +263,9 @@ const renderFooter = function () {
     const thElement = document.createElement('th');
     trElement.appendChild(thElement);
 
-    for(let x = 0; x < objArr.length; x++) // 5 locations
+    for(let x = 0; x < allShopsArray.length; x++) // use allShopsArray to be able to calculate unlimited number of objects
     {
-      total1 = total1 + objArr[x].logCookiesPerHour[i];
+      total1 = total1 + allShopsArray[x].logCookiesPerHour[i];
     }
 
     thElement.textContent = total1;
@@ -281,12 +280,15 @@ const renderFooter = function () {
   trElement.appendChild(th2Element);
 
 
-  for(let i = 0; i < objArr.length; i++) //dynamic variable
+  for(let i = 0; i < allShopsArray.length; i++) //dynamic variable
   {
-    total2 = total2 + objArr[i].totalLocation;
+    total2 = total2 + allShopsArray[i].totalLocation;
   }
 
   th2Element.textContent = total2;
+
+
+  trElement.setAttribute('id','totalRow'); //set id to total row
 
 };
 
@@ -303,7 +305,6 @@ renderHeader();
 seattle.getCustomersPerHour();
 seattle.getCookiesPerHour();
 seattle.getLocationTotal();
-console.log(seattle);
 seattle.renderData();
 
 
@@ -316,7 +317,6 @@ seattle.renderData();
 tokyo.getCustomersPerHour();
 tokyo.getCookiesPerHour();
 tokyo.getLocationTotal();
-console.log(tokyo);
 tokyo.renderData();
 
 
@@ -327,7 +327,6 @@ tokyo.renderData();
 dubai.getCustomersPerHour();
 dubai.getCookiesPerHour();
 dubai.getLocationTotal();
-console.log(dubai);
 dubai.renderData();
 
 
@@ -339,7 +338,6 @@ dubai.renderData();
 paris.getCustomersPerHour();
 paris.getCookiesPerHour();
 paris.getLocationTotal();
-console.log(paris);
 paris.renderData();
 
 
@@ -350,8 +348,49 @@ paris.renderData();
 lima.getCustomersPerHour();
 lima.getCookiesPerHour();
 lima.getLocationTotal();
-console.log(lima);
 lima.renderData();
 
 //---------------------------Footer ------------------------------------------
+
 renderFooter();
+
+
+
+
+// Adding New Shop to Table / Form -------------------------------------------------------------------------------------------
+
+
+const formElement = document.getElementById ('addNewLocation'); //reach where event takes place
+
+formElement.addEventListener('submit', // add event listner
+  function (event) // add event handler (responds to event)
+  {
+
+    event.preventDefault();// stops browser refreshing when you click submit (what's the point?)
+
+
+    // take data from form
+    const location= event.target.location.value;
+    const avgCookies= event.target.avgCookies.value;
+    const minCustomer= event.target.minCustomer.value;
+    const maxCustomer= event.target.maxCustomer.value;
+
+
+    //create new object and asign data
+    const newShop = new PatCookies (location, avgCookies, minCustomer, maxCustomer);
+
+    //invoking
+    newShop.getCustomersPerHour();
+    newShop.getCookiesPerHour();
+    newShop.getLocationTotal();
+
+    newShop.renderData();
+
+    renderFooter(); // render total row after new shop
+
+  }
+
+);
+
+
+
