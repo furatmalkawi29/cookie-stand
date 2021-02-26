@@ -118,14 +118,6 @@ PatCookies.prototype.getLocationTotal = function ()
 
 PatCookies.prototype.renderData = function ()
 {
-
-  if (allShopsArray.length > 5) //check if new shop added (other than original 5 )
-  {
-    const idTotalRow = document.getElementById ('totalRow'); // get total row
-    idTotalRow.remove(); // remove total row
-
-  }
-
   //Parent Element <table></table>------------
   const parentElement = document.getElementById ('patSales');
 
@@ -163,6 +155,24 @@ PatCookies.prototype.renderData = function ()
 
 };
 
+
+//--------------------------------------------------------------------------------
+PatCookies.prototype.removeTotalRow = function ()
+{
+  const deletedRow = document.getElementById('totalRow');
+
+  const parentOfDeletedRow = document.getElementById('patSales');
+
+  parentOfDeletedRow.removeChild (deletedRow);
+};
+
+
+//-----------Another Way:
+// PatCookies.prototype.removeTotalRow = function ()
+// {
+//   const deletedRow = document.getElementById('totalRow');
+//   deletedRow.remove();
+// };
 
 
 // new objects ----------------------------------------------------------------------------------------
@@ -292,9 +302,6 @@ const renderFooter = function () {
 };
 
 
-
-
-
 // Invoking ------------------------------------------------------------------------------------------
 
 //--------------------------- Header ------------------------------------------
@@ -383,8 +390,8 @@ formElement.addEventListener('submit', // add event listner
     newShop.getCookiesPerHour();
     newShop.getLocationTotal();
 
-    newShop.renderData();
-
+    newShop.removeTotalRow(); //remove total row
+    newShop.renderData(); // render newshop data
     renderFooter(); // render total row after new shop
 
   }
